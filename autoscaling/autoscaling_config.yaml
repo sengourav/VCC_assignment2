@@ -1,0 +1,23 @@
+name: my-managed-instance-group
+instanceTemplate: projects/[PROJECT_ID]/global/instanceTemplates/my-instance-template
+targetSize: 1
+autoScaling:
+  coolDownPeriodSec: 60
+  cpuUtilization:
+    utilizationTarget: 0.7  # 70% CPU utilization threshold
+  minNumReplicas: 1
+  maxNumReplicas: 5
+  mode: ON
+region: us-central1
+distributionPolicy:
+  zones:
+  - zone: us-central1-a
+  - zone: us-central1-b
+  - zone: us-central1-c
+updatePolicy:
+  type: PROACTIVE
+  minimalAction: REPLACE
+  maxSurge:
+    fixed: 1
+  maxUnavailable:
+    fixed: 0
